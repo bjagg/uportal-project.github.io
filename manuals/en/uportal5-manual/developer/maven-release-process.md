@@ -63,6 +63,36 @@ grep -RIn --include=pom.xml -E 'oss\.sonatype\.org|sonatype-nexus-staging' .
 
 If any stale OSSRH URLs appear, override them with a `<distributionManagement>` block in the component's top-level `pom.xml` so the inherited values are shadowed. Long-term, release an updated parent POM with the new URLs so every descendant picks them up automatically.
 
+### Verify required POM metadata
+
+The Central Publisher Portal rejects deployments missing certain POM elements. In addition to the URLs above, every published POM must declare a `<developers>` element. Missing developers info returns:
+
+```
+HTTP 400
+Deployment reached an unexpected status: Failed
+pkg:maven/<groupId>/<artifactId>@<version>
+- Developers information is missing
+```
+
+**Audit before releasing:**
+
+```sh
+grep -rl --include=pom.xml '<developers>' . || echo "MISSING: no <developers> block in any POM"
+```
+
+For components inheriting from `uportal-portlet-parent`, the block is inherited automatically (version `44+`). For components on older parent versions, on a different parent (e.g. `spring-boot-starter-parent`), or publishing the parent itself, declare the block explicitly in the top-level `pom.xml`:
+
+```xml
+<developers>
+    <developer>
+        <organization>uPortal Developers</organization>
+        <organizationUrl>https://github.com/uPortal-Project/uPortal/blob/master/docs/COMMITTERS.md</organizationUrl>
+    </developer>
+</developers>
+```
+
+Pointing at the `COMMITTERS.md` in the main `uPortal` repo keeps this stable across all ecosystem releases; individual contributors come and go, the committers list is the durable reference.
+
 ## Which Repo?
 
 We encourage performing releases directly from a clone of the official repository rather than a fork to avoid extra steps.
