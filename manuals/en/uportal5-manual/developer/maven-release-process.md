@@ -16,8 +16,16 @@ There are 3 prerequisites to cutting maven releases:
     -   Generate a key pair `gpg2 --gen-key`
     -   If you choose to have an expiration date, edit the key via `gpg2 --edit-key {key ID}`
     -   Determine the key ID and keyring file `gpg2 --list-keys` (the key ID is the `pub` ID)
-    -   Distribute your public key `gpg2 --keyserver hkp://keyserver.ubuntu.com --send-keys {key ID}`
+    -   **Publish your key on `keys.openpgp.org`** — the Central Publisher Portal queries this keyserver **first** when validating signatures. A key that's only on `keyserver.ubuntu.com` or other SKS-network servers will fail signature validation non-deterministically (sometimes the first release in a session works because of caching, then a subsequent one in the same session fails — verified during the 2026 portlet release cycle).
+        -   `keys.openpgp.org` does not accept SKS-style API uploads. Export your public key with `gpg2 --export --armor {fingerprint} > pubkey.asc`, then paste the contents into the web form at <https://keys.openpgp.org/upload> and confirm via the email link they send to your key's UID address. Identity packets are gated behind email confirmation; without it, the key publishes but searches against your email won't return it.
+        -   Optionally also push to `keyserver.ubuntu.com` as a redundancy: `gpg2 --keyserver hkp://keyserver.ubuntu.com --send-keys {key ID}`
         -   The `pool.sks-keyservers.net` pool was decommissioned in 2021 — do not use it.
+    -   **Verify your key is reachable on `keys.openpgp.org`** before every release session:
+        ```sh
+        $ curl -so /dev/null -w "%{http_code}\n" \
+            "https://keys.openpgp.org/vks/v1/by-fingerprint/{FINGERPRINT}"
+        ```
+        `200` = good. `404` = upload first.
 
 ## Setup
 
@@ -193,6 +201,24 @@ $ curl -X GET \
 3.  Review the release for the expected artifacts (parent POM + every submodule, including any WAR modules).
 4.  Verify the artifacts pass validation checks (signatures, POM requirements, matching `<packaging>` — see below).
 5.  Publish the deployment to make it available on Maven Central.
+
+### Recovering from a failed deployment
+
+When the portal's validation rejects a deployment, the staged repository goes into **`failed`** state and **blocks the namespace** until you drop it. New uploads to the same `groupId` (e.g. `org.jasig.portlet`) will return `400 — Repository ... is in state closed/failed and must be dropped before a new release can occur`.
+
+The recovery sequence is the same regardless of which validation rule fired:
+
+1.  In the portal UI under **Deployments**, find the failed entry, click **Drop** (not **Publish**).
+2.  Fix the root cause locally (signature, POM metadata, packaging, etc. — see common failures below).
+3.  If `release:perform` had already advanced the version (i.e. the `release-plugin` commits + tag are on `master` for a version that never reached Maven Central): the cleanest path is to **skip that version** and release as the next one. Document it in the next-version's release notes ("X.Y.Z was prepared but never published due to ... ; X.Y.Z+1 ships the same intended content"). The orphan tag remains on the repo as historical record. Rewriting tag history is destructive and rarely worth it.
+4.  Re-run `mvn release:clean release:prepare release:perform`, then the manual upload curl above.
+
+#### Common validation failures
+
+-   **`Failed to verify the PGP signature. Please contact support for assistance.`** — The signing key isn't reachable on `keys.openpgp.org` (the keyserver Central Portal queries first). Upload it as described in the Prerequisites and verify with the `curl` check.
+-   **`Developers information is missing`** — The published POM lacks a `<developers>` element. See "Verify required POM metadata" above.
+-   **`File with path '.../{artifactId}-{version}.jar' is missing`** — The deployment manifest lists a primary `.jar` for a module that doesn't actually upload one. Common cause for `<packaging>war</packaging>` modules: the Java + War + Spring Boot plugin combo auto-enables a plain `jar` task on top of the War. In Gradle, set `jar.enabled = false` (Spring Boot 1.x) or `bootJar { enabled = false }` (Spring Boot 2+). In Maven this rarely happens because `<packaging>` is authoritative.
+-   **`Repository ... is in state closed and must be dropped before a new release can occur`** — A previous deployment in the same namespace is still staged. Drop it first.
 
 ### A note on POM packaging
 
