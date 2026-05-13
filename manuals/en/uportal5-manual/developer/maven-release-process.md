@@ -162,13 +162,29 @@ $ ./gradlew clean portalInit
 
 If you had to commit changes for the styling, push them to the repo.
 
-Run the following command in the directory of the component's clone.  If this is your first time, run each `release:` command separately so if there's a failure in the process, it'll be easier to diagnose and restart.
+Run the following command in the directory of the component's clone. Pass the release version and next development version on the command line and run in batch mode — Maven's interactive prompts fire mid-build and have historically been a source of operator error (ambiguous wording, unpredictable timing). If this is your first time releasing the component, run each `release:` goal separately (`release:clean`, then `release:prepare`, then `release:perform`) so a failure is easier to diagnose and restart.
 
 ```sh
-$ mvn release:clean release:prepare release:perform
+$ mvn -B release:clean release:prepare release:perform \
+    -DautoVersionSubmodules=true \
+    -DreleaseVersion={X.Y.Z} \
+    -DdevelopmentVersion={X.Y.Z+1}-SNAPSHOT \
+    -Dtag={artifactId}-{X.Y.Z}
 ```
 
-:Note: During the `release` tasks, you will be prompted for a release version (e.g. `3.5.1`), release tag, and new development version.  Press `Enter` for the defaults.  The release process will then create two commits - a commit to set the new version (`3.5.1`), and a commit to set the version to the new snapshot (`3.5.2-SNAPSHOT`)
+For example, releasing BookmarksPortlet 3.5.1:
+
+```sh
+$ mvn -B release:clean release:prepare release:perform \
+    -DautoVersionSubmodules=true \
+    -DreleaseVersion=3.5.1 \
+    -DdevelopmentVersion=3.5.2-SNAPSHOT \
+    -Dtag=BookmarksPortlet-3.5.1
+```
+
+The release process creates two commits — one setting the release version (`3.5.1`) and the SCM tag (`BookmarksPortlet-3.5.1`), and one setting the next snapshot (`3.5.2-SNAPSHOT`).
+
+If you need to fall back to the interactive flow (mainly for debugging an unusual `prepare` failure), drop the `-B` and `-D` flags and Maven will prompt for each value during `release:prepare`. Press `Enter` for the defaults.
 
 ## Verify and Publish from Central Publisher Portal
 
