@@ -2,6 +2,8 @@ name: main
 on:
   - pull_request
   - push
+permissions:
+  contents: read
 jobs:
   main:
     name: Spell Check and Lint Check
