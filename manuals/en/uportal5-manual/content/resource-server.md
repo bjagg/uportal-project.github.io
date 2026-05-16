@@ -22,7 +22,7 @@ to Resource Server via Gradle configuration over this manual approach.
 There is also another version of Resource Server currently deployed with
 `uPortal-start`. `ResourceServingWebapp` contains out-dated packages that
 some uPortal components require. Again, look at your Tomcat deployment
-to see what is actually available. ***Use of this module is discouraged.***
+to see what is actually available. **_Use of this module is discouraged._**
 
 ## Create `rs/` Directory
 
@@ -72,5 +72,8 @@ in JSPs, the most likely scenario.
 For example:
 
 ```html
-   <script src="/resource-server/rs/backbone/1.3.3/backbone-1.3.3.min.js" type="text/javascript"> </script>
+<script
+  src="/resource-server/rs/backbone/1.3.3/backbone-1.3.3.min.js"
+  type="text/javascript"
+></script>
 ```

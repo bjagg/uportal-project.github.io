@@ -11,7 +11,7 @@ les POST provenant de code provenant d'autres serveurs. Cette restriction
 peut interférer avec les services frontaux, tels que CAS et Shibboleth.
 
 Cela peut être atténué par les services de liste blanche pour le filtre CORS.
-Dans `uPortal.properties`, ajoutez les services pouvant être redirigés vers uPortal 
+Dans `uPortal.properties`, ajoutez les services pouvant être redirigés vers uPortal
 dans la propriété suivante :
 
 ```properties

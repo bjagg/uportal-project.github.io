@@ -2,64 +2,64 @@
 
 ## Table des matières
 
-1.  [Créer une Skin](#créer-une-skin)
-2.  [Configuration du Skin](#configuration-du-skin)
-3.  [Notes additionnelles](#notes-additionnelles)
-    1.  [Dynamic Respondr Skin](#dynamic-respondr-skin)
-    2.  [Effets de Page](#effets-de-page)
+1. [Créer une Skin](#créer-une-skin)
+2. [Configuration du Skin](#configuration-du-skin)
+3. [Notes additionnelles](#notes-additionnelles)
+   1. [Dynamic Respondr Skin](#dynamic-respondr-skin)
+   2. [Effets de Page](#effets-de-page)
 
 ## Créer une Skin
 
-1.  Commencer par le dossier racine du code source uPortal
-2.  Accéder au dossier *uportal-war/src/main/webapp/media/skins*
-3.  Copier le dossier *defaultSkin/* et attribuez-lui un nom spécifique à votre institution (par exemple *wolverine/*)
-4.  Copier le fichier *defaultSkin.less* et attribuez-lui le même nom (par exemple, *wolverine.less*)
-5.  Modifier les imports dans le fichier de Skin pour pointer vers le dossier de skin. par exemple. *wolverine.less*
+1. Commencer par le dossier racine du code source uPortal
+2. Accéder au dossier _uportal-war/src/main/webapp/media/skins_
+3. Copier le dossier _defaultSkin/_ et attribuez-lui un nom spécifique à votre institution (par exemple _wolverine/_)
+4. Copier le fichier _defaultSkin.less_ et attribuez-lui le même nom (par exemple, _wolverine.less_)
+5. Modifier les imports dans le fichier de Skin pour pointer vers le dossier de skin. par exemple. _wolverine.less_
 
-    ``` less
-    /** DO NOT REMOVE OR ALTER THESE INCLUDES **/
-    @import "defaultSkin/less/variables.less";
-    @import "common/common.less";
-    /*******************************************/
+   ```less
+   /** DO NOT REMOVE OR ALTER THESE INCLUDES **/
+   @import "defaultSkin/less/variables.less";
+   @import "common/common.less";
+   /*******************************************/
 
-    @import "wolverine/less/variables.less";
-    @import "wolverine/less/skin.less";
-    ```
+   @import "wolverine/less/variables.less";
+   @import "wolverine/less/skin.less";
+   ```
 
-6.  Accéder au dossier *uportal-war/src/main/webapp/media/skins/respondr*
-7.  Éditer *skinList.xml* pour pointer les noms `<skin-name>` et `<skin-key>` vers le nouveau nom de skin. Par exemple.
+6. Accéder au dossier _uportal-war/src/main/webapp/media/skins/respondr_
+7. Éditer _skinList.xml_ pour pointer les noms `<skin-name>` et `<skin-key>` vers le nouveau nom de skin. Par exemple.
 
-    ``` xml
-    <skin>
-        <skin-key>wolverine</skin-key>
-        <skin-name>wolverine</skin-name>
-        <skin-description>
-            Basic skin for the Respondr theme based on Twitter Bootstrap and Responsive Design
-        </skin-description>
-    </skin>
-    ```
+   ```xml
+   <skin>
+       <skin-key>wolverine</skin-key>
+       <skin-name>wolverine</skin-name>
+       <skin-description>
+           Basic skin for the Respondr theme based on Twitter Bootstrap and Responsive Design
+       </skin-description>
+   </skin>
+   ```
 
-8.  Accéder au dossier *uportal-war/src/main/data/default_entities/portlet-definition*
-9.  Éditer *dynamic-respondr-skin.portlet-definition.xml* et ajouter une `<portal-preference>` avec un `<name>` de `PREFdynamicSkinName` et une `<value>` avec le nom de la Skin. Par exemple.
+8. Accéder au dossier _uportal-war/src/main/data/default_entities/portlet-definition_
+9. Éditer _dynamic-respondr-skin.portlet-definition.xml_ et ajouter une `<portal-preference>` avec un `<name>` de `PREFdynamicSkinName` et une `<value>` avec le nom de la Skin. Par exemple.
 
-    ``` xml
-    <portlet-preference>
-        <name>PREFdynamicSkinName</name>
-        <value>wolverine</value>
-    </portlet-preference>
-    ```
+   ```xml
+   <portlet-preference>
+       <name>PREFdynamicSkinName</name>
+       <value>wolverine</value>
+   </portlet-preference>
+   ```
 
-10. Accéder au dossier *uportal-war/src/main/data/required_entities/stylesheet-descriptor*
-11. Éditer *Respondr.stylesheet-descriptor.xml* et changer la `<default-value>` pour le nom de la Skin. Par exemple. 
+10. Accéder au dossier _uportal-war/src/main/data/required_entities/stylesheet-descriptor_
+11. Éditer _Respondr.stylesheet-descriptor.xml_ et changer la `<default-value>` pour le nom de la Skin. Par exemple.
 
-    ``` xml
-    <stylesheet-parameter>
-        <name>skin</name>
-        <default-value>wolverine</default-value>
-        <scope>PERSISTENT</scope>
-        <description>Skin name</description>
-    </stylesheet-parameter>
-    ```
+   ```xml
+   <stylesheet-parameter>
+       <name>skin</name>
+       <default-value>wolverine</default-value>
+       <scope>PERSISTENT</scope>
+       <description>Skin name</description>
+   </stylesheet-parameter>
+   ```
 
 12. Lancer `ant initdb` pour appliquer ces changements en base.
 13. Lancer `ant clean deploy-war` pour lancer un Build du portail avec la nouvelle Skin.
@@ -77,12 +77,11 @@ Des Changements peuvent être fait pour surcharger les [variables Bootstrap](/up
 Les variables de `@color` 1-6 sont des valeurs personnalisables via la portlet dynamic respondr skin.
 
 ```less
-@color1
-@color2
+@color1 @color2
 @color3
 @color4
 @color5
-@color6
+@color6;
 ```
 
 ![Dynamic Respondr Skin Portlet Page](../../../../assets/images/dynamic-respondr-skin.png)

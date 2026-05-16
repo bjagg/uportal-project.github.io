@@ -9,9 +9,9 @@ the best advice from the community.
 
 See also
 
-+   [Fronting Tomcat with httpd](fronting-with-httpd.md)
-+   [Using SSL](ssl-configuration.md)
-+   [Debugging with JPDA](ssl-configuration.md)
+- [Fronting Tomcat with httpd](fronting-with-httpd.md)
+- [Using SSL](ssl-configuration.md)
+- [Debugging with JPDA](ssl-configuration.md)
 
 ## Linux/Unix Installation
 
@@ -29,7 +29,7 @@ tar -zxvf apache-tomcat-8.0.33.tar.gz
 
 ### 3. Rename
 
-*Optionally* rename your install to something more meaningful:
+_Optionally_ rename your install to something more meaningful:
 
 ```shell_session
 mv apache-tomcat-8.0.33 uportal-tomcat
@@ -118,7 +118,6 @@ Jasig portlets, as well as many other popular JSR-168 and JSR-286 portlets, rely
 
 To enable this feature for Tomcat 7 or 8, add the `sessionCookiePath="/"` to `CATALINA_BASE/conf/context.xml`.
 
-
 ```xml
 <Context sessionCookiePath="/">
 ```
@@ -149,7 +148,6 @@ JAVA_OPTS="$JAVA_OPTS -XX:+PrintCommandLineFlags -XX:MaxPermSize=384m -Xms1024m 
 ### Required file permissions
 
 Several uPortal webapps write to their deployed webapps folder to add dynamic content to the portal (altering the Respondr Dynamic Skin and managing Attachments uploaded to uPortal are two use cases). Insure the process Tomcat is running as has write access to `CATALINA_BASE/webapps/*` directories. Typically this is done by having the same account tomcat is running as be the same account you use to build and deploy uPortal.
-
 
 ### GZipping HTML
 
@@ -192,12 +190,12 @@ Tomcat's default is 30 minutes.
 
 #### JVM settings
 
-+   [Example JVM settings](https://wiki.jasig.org/display/UPC/JVM+Configurations)
-+   [Heap tuning](https://wiki.jasig.org/display/UPC/uPortal+Heap+Tuning)
+- [Example JVM settings](https://wiki.jasig.org/display/UPC/JVM+Configurations)
+- [Heap tuning](https://wiki.jasig.org/display/UPC/uPortal+Heap+Tuning)
 
 #### Disabling SSLv3
 
-(This bit is about *outgoing* SSL. [Documentation about incoming SSL configuration](ssl-configuration.md) is elsewhere.)
+(This bit is about _outgoing_ SSL. [Documentation about incoming SSL configuration](ssl-configuration.md) is elsewhere.)
 
 Some sites have chosen to disable SSLv3 on their CAS server due to various vulnerabilities. That can cause problems with the CAS client used in uPortal being unable to establish an HTTPS connection to the CAS server to validate the service ticket and throwing an exception
 
@@ -213,7 +211,7 @@ Your CAS server must be configured to use one of the mentioned protocols or the 
 
 If you run into troubles:
 
-+   [Diagnosing TLS, SSL, and HTTPS](https://blogs.oracle.com/java-platform-group/entry/diagnosing_tls_ssl_and_https)
+- [Diagnosing TLS, SSL, and HTTPS](https://blogs.oracle.com/java-platform-group/entry/diagnosing_tls_ssl_and_https)
 
 [Tomcat configuration page]: http://tomcat.apache.org/tomcat-7.0-doc/config/http.html
 [faster Tomcat startup wiki page]: http://wiki.apache.org/tomcat/HowTo/FasterStartUp

@@ -22,7 +22,7 @@ Dans le dossier filters, localiser le fichier `local.properties` (par défaut da
 # HSQL Configuration
 environment.build.hsql.port=8887
 
-# Database Connection Settings 
+# Database Connection Settings
 environment.build.hibernate.connection.driver_class=COM.ibm.db2.jdbc.app.DB2Driver
 environment.build.hibernate.connection.url=jdbc:db2:uPortal3Db
 environment.build.hibernate.connection.username=sa
@@ -30,7 +30,7 @@ environment.build.hibernate.connection.password=
 environment.build.hibernate.dialect=org.hibernate.dialect.DB2Dialect
 ```
 
-## Étape 3 : Ajouter le pilote de base de données 
+## Étape 3 : Ajouter le pilote de base de données
 
 Ouvrir le fichier `uportal-db/pom.xml`, décommenter le pilote db2 ci-dessous et modifier le si nécessaire.
 
@@ -46,8 +46,8 @@ Ajouter les propriétés de version appropriées au fichier racine `pom.xml` ou 
     <scope>compile</scope>
   </dependency>
   <!--
-   | The following db drivers should be uncommented and/or modified as needed for server 
-   | deployments.  (Add all that are needed.)  Don't forget to add appropriate  .version 
+   | The following db drivers should be uncommented and/or modified as needed for server
+   | deployments.  (Add all that are needed.)  Don't forget to add appropriate  .version
    | properties to the root pom.xml, or simply enter the appropriate version below.
    +-->
   <!--
@@ -65,7 +65,7 @@ Ajouter les propriétés de version appropriées au fichier racine `pom.xml` ou 
 	        <version>${db2.version}</version>
 	        <scope>compile</scope>
 	    </dependency>
- 
+
 		<!--
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
@@ -99,7 +99,7 @@ L'exécution de `ant dbtest` vous indiquera si vous avez correctement configuré
 ant dbtest
 ```
 
-## Étape 5 : Build et Deploiement 
+## Étape 5 : Build et Deploiement
 
 Après un test réussi, vous pouvez exécuter la commande ci-dessous pour créer les tables de la base de données et copier les fichiers dans votre conteneur de servlet.
 
@@ -110,9 +110,6 @@ ant clean initportal
 ```
 
 ## Étape 6 : Redémarrer Tomcat
-
-
- 
 
 ## Problèmes et bogues connus
 

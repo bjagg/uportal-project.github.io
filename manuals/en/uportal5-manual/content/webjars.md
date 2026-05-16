@@ -1,11 +1,11 @@
 # Adding WebJars to uPortal-start
 
-WebJars are a relatively recent addition to the web application development landscape.  They are
+WebJars are a relatively recent addition to the web application development landscape. They are
 client-side web libraries (typically JavaScript and/or CSS) packaged into JAR (Java Archive) files.
 
 ## Introducing the `resource-server`
 
-The `resource-server` is a bundled module in uPortal-start.  You can easily deploy WebJars with
+The `resource-server` is a bundled module in uPortal-start. You can easily deploy WebJars with
 uPortal and use their contents to build a compelling portal experience by declaring them as
 dependencies of the `overlays:resource-server` sub-project.
 
@@ -23,8 +23,8 @@ WebJar implementations are not available.
   runtime 'org.webjars.npm:uportal__content-carousel:1.6.0@jar'
 ```
 
-**NOTE:** In most cases, you should include the `@jar` classifier with your WebJar dependency.  This
-classifier tells Gradle not to pull transitive dependencies of your WebJar.  (Transitive
+**NOTE:** In most cases, you should include the `@jar` classifier with your WebJar dependency. This
+classifier tells Gradle not to pull transitive dependencies of your WebJar. (Transitive
 dependencies may be needed if you were extending the component in Node.js, but typically aren't
 required for using the component in a browser.)
 

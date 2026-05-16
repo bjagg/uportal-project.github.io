@@ -24,6 +24,7 @@ hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 ## Step 3: Add the database driver
 
 In `overlays/build.gradle` add the following line below the line for hsqldb
+
 ```gradle
 jdbc "org.postgresql:postgresql:${postgresqlDriverVersion}"
 ```

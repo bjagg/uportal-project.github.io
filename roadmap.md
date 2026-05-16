@@ -40,13 +40,14 @@ A dropped feature / change may have merit, but the community may not want to pla
 
 ## uPortal Roadmap
 
-Category        | 2025 (uPv6)                    | 2026 (uPv7)                   | 2027 (uPv8)                 | 2028 (uPv9)
---------------- |--------------------------------|-------------------------------|-----------------------------| -----------------------
-Differentiating | Modernize Rendered Pages<br>Convert External Portlets to WCs | Revamp Rendering Pipeline<br>Convert Internal Portlets to WCs |
-Integration | Add CI Tools (i.e. Accessibility testing)<br>Clean up APIs (low priority) |  | Modularize Core
-Parity |Java 21/Maven/Tomcat Upgrade |  | Adopt Latest Java LTS | Replace Gradle
-Dropped | | Drop Portlet Support | |
+| Category        | 2025 (uPv6)                                                               | 2026 (uPv7)                                                   | 2027 (uPv8)           | 2028 (uPv9)    |
+| --------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------- | --------------------- | -------------- |
+| Differentiating | Modernize Rendered Pages<br>Convert External Portlets to WCs              | Revamp Rendering Pipeline<br>Convert Internal Portlets to WCs |
+| Integration     | Add CI Tools (i.e. Accessibility testing)<br>Clean up APIs (low priority) |                                                               | Modularize Core       |
+| Parity          | Java 21/Maven/Tomcat Upgrade                                              |                                                               | Adopt Latest Java LTS | Replace Gradle |
+| Dropped         |                                                                           | Drop Portlet Support                                          |                       |
 
 ## Ongoing Tasks
--   Security Patches
--   Migrate / Maintain Docs
+
+- Security Patches
+- Migrate / Maintain Docs

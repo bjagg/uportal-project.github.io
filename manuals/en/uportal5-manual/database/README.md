@@ -34,7 +34,7 @@ As an example, a driver for SQL Server is added:
          */
         jdbc "org.hsqldb:hsqldb:${hsqldbVersion}"
         jdbc "com.microsoft.sqlserver:mssql-jdbc:${mssqlJdbcVersion}"
- 
+
         ...
     }
 ```
@@ -85,15 +85,15 @@ As example, for `NewsReaderPortlet` the named file will be `news-reader.properti
 
 Note: Also these files can be used for other properties !
 
-## uPortal Production Database Configuration 
+## uPortal Production Database Configuration
 
 Select the database below for notes and examples of configuration.
 
-+   [DB2](db2.md)
-+   [Hypersonic](hypersonic.md)
-+   [Microsoft SQL Server](ms-sqlserver.md)
-+   [MySQL](mysql.md)
-+   [MariaDB](mariadb.md)
-+   [Oracle RDBMS](oracle.md)
-+   [PostgreSQL](postgresql.md)
-+   [Sybase](sybase.md)
+- [DB2](db2.md)
+- [Hypersonic](hypersonic.md)
+- [Microsoft SQL Server](ms-sqlserver.md)
+- [MySQL](mysql.md)
+- [MariaDB](mariadb.md)
+- [Oracle RDBMS](oracle.md)
+- [PostgreSQL](postgresql.md)
+- [Sybase](sybase.md)

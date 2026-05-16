@@ -39,4 +39,3 @@ and SQL can be run. This will timeout after 5 seconds.
 New checks can be implemented by extending the `IHealthChecker` Interface and adding a Spring bean of the class implementation.
 
 Please consider donating new general checkers back to the community.
-
