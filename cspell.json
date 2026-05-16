@@ -27,6 +27,7 @@
         "adopters"
     ],
     "words": [
+        "aggr",
         "Apereo",
         "appender",
         "aspectj",
@@ -112,6 +113,7 @@
         "pluggables",
         "portail",
         "portlet",
+        "portletexec",
         "portlets",
         "prefork",
         "Pwith",
