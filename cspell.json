@@ -29,6 +29,7 @@
     "words": [
         "Apereo",
         "appender",
+        "aspectj",
         "autoextend",
         "cacerts",
         "cachesize",
@@ -63,6 +64,7 @@
         "fontawesome",
         "FOSS",
         "FOSSY",
+        "freefair",
         "genkey",
         "Goodfellow",
         "gradlew",
@@ -86,6 +88,7 @@
         "JDBC",
         "jgroups",
         "jmeter",
+        "joinpoint",
         "JPDA",
         "keepalive",
         "keyalg",

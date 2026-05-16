@@ -6,6 +6,7 @@ ___We welcome any assistance in migrating documentation from legacy/other source
 
 ## Configuration
 
+*   [Session Replication AOP](configure/session_aop/session_aop.md)
 *   [SmartLDAP](configure/users_groups/group_stores/smartldap.md)
 
 ## Developer Documentation
