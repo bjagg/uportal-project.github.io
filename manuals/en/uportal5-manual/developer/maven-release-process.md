@@ -4,28 +4,28 @@
 
 There are 3 prerequisites to cutting maven releases:
 
-1.  [Sonatype Account at Central Publisher Portal](https://central.sonatype.com/)
-    -   NOTE!! Do not link a social account — create a local account.
-    -   See the first part of [Register to Publish Via the Central Portal](https://central.sonatype.org/register/central-portal/).
-    -   **Note:** The legacy OSSRH service (`oss.sonatype.org`) and the Sonatype JIRA account-creation flow were sunset in June 2025. All publishing — and all namespace-permissions requests — now go through the Central Publisher Portal.
-2.  Permissions at Sonatype to release projects
-    -   Namespace permissions are managed via the [Central Publisher Portal](https://central.sonatype.com/).
-    -   If you need access to the `org.jasig.portlet` (or another uPortal ecosystem) namespace, contact a uPortal committer.
-    -   Expect approval to take a few days to complete.
-3.  [Set up public PGP key on a server](https://central.sonatype.org/pages/working-with-pgp-signatures.html)
-    -   Generate a key pair `gpg2 --gen-key`
-    -   If you choose to have an expiration date, edit the key via `gpg2 --edit-key {key ID}`
-    -   Determine the key ID and keyring file `gpg2 --list-keys` (the key ID is the `pub` ID)
-    -   **Publish your key on `keys.openpgp.org`** — the Central Publisher Portal queries this keyserver **first** when validating signatures. A key that's only on `keyserver.ubuntu.com` or other SKS-network servers will fail signature validation non-deterministically (sometimes the first release in a session works because of caching, then a subsequent one in the same session fails — verified during the 2026 portlet release cycle).
-        -   `keys.openpgp.org` does not accept SKS-style API uploads. Export your public key with `gpg2 --export --armor {fingerprint} > pubkey.asc`, then paste the contents into the web form at <https://keys.openpgp.org/upload> and confirm via the email link they send to your key's UID address. Identity packets are gated behind email confirmation; without it, the key publishes but searches against your email won't return it.
-        -   Optionally also push to `keyserver.ubuntu.com` as a redundancy: `gpg2 --keyserver hkp://keyserver.ubuntu.com --send-keys {key ID}`
-        -   The `pool.sks-keyservers.net` pool was decommissioned in 2021 — do not use it.
-    -   **Verify your key is reachable on `keys.openpgp.org`** before every release session:
-        ```sh
-        $ curl -so /dev/null -w "%{http_code}\n" \
-            "https://keys.openpgp.org/vks/v1/by-fingerprint/{FINGERPRINT}"
-        ```
-        `200` = good. `404` = upload first.
+1. [Sonatype Account at Central Publisher Portal](https://central.sonatype.com/)
+   - NOTE!! Do not link a social account — create a local account.
+   - See the first part of [Register to Publish Via the Central Portal](https://central.sonatype.org/register/central-portal/).
+   - **Note:** The legacy OSSRH service (`oss.sonatype.org`) and the Sonatype JIRA account-creation flow were sunset in June 2025. All publishing — and all namespace-permissions requests — now go through the Central Publisher Portal.
+2. Permissions at Sonatype to release projects
+   - Namespace permissions are managed via the [Central Publisher Portal](https://central.sonatype.com/).
+   - If you need access to the `org.jasig.portlet` (or another uPortal ecosystem) namespace, contact a uPortal committer.
+   - Expect approval to take a few days to complete.
+3. [Set up public PGP key on a server](https://central.sonatype.org/pages/working-with-pgp-signatures.html)
+   - Generate a key pair `gpg2 --gen-key`
+   - If you choose to have an expiration date, edit the key via `gpg2 --edit-key {key ID}`
+   - Determine the key ID and keyring file `gpg2 --list-keys` (the key ID is the `pub` ID)
+   - **Publish your key on `keys.openpgp.org`** — the Central Publisher Portal queries this keyserver **first** when validating signatures. A key that's only on `keyserver.ubuntu.com` or other SKS-network servers will fail signature validation non-deterministically (sometimes the first release in a session works because of caching, then a subsequent one in the same session fails — verified during the 2026 portlet release cycle).
+     - `keys.openpgp.org` does not accept SKS-style API uploads. Export your public key with `gpg2 --export --armor {fingerprint} > pubkey.asc`, then paste the contents into the web form at <https://keys.openpgp.org/upload> and confirm via the email link they send to your key's UID address. Identity packets are gated behind email confirmation; without it, the key publishes but searches against your email won't return it.
+     - Optionally also push to `keyserver.ubuntu.com` as a redundancy: `gpg2 --keyserver hkp://keyserver.ubuntu.com --send-keys {key ID}`
+     - The `pool.sks-keyservers.net` pool was decommissioned in 2021 — do not use it.
+   - **Verify your key is reachable on `keys.openpgp.org`** before every release session:
+     ```sh
+     $ curl -so /dev/null -w "%{http_code}\n" \
+         "https://keys.openpgp.org/vks/v1/by-fingerprint/{FINGERPRINT}"
+     ```
+     `200` = good. `404` = upload first.
 
 ## Setup
 
@@ -60,8 +60,8 @@ The legacy OSSRH host `oss.sonatype.org` was sunset in June 2025. Every `<distri
 
 **Required URLs:**
 
--   Release: `https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/`
--   Snapshot: `https://central.sonatype.com/repository/maven-snapshots/`
+- Release: `https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/`
+- Snapshot: `https://central.sonatype.com/repository/maven-snapshots/`
 
 **Audit before releasing** (from the component root):
 
@@ -111,8 +111,8 @@ This means when testing on `uPortal-start` for the release, you should use the `
 
 For any non-snapshot release, email a notice to [`uportal-dev`](https://groups.google.com/a/apereo.org/forum/#!forum/uportal-dev) a couple of working days prior to cutting the release.
 
--   Request any in-progress Pull Requests be merged by a certain date/time.
--   Request deployers test the tip of `master`.
+- Request any in-progress Pull Requests be merged by a certain date/time.
+- Request deployers test the tip of `master`.
 
 ## Testing
 
@@ -121,6 +121,7 @@ Build a clean version of `uPortal-start` with the quickstart data set and perfor
 ### Prepare For Testing
 
 Check the styling:
+
 ```sh
 $ mvn notice:generate
 $ mvn license:format
@@ -132,11 +133,13 @@ Review any changes from the styling tasks and commit them.
 If you run into issues with the Maven task not finding licenses for dependencies, Maven will create a dependency mapping file that you should fold into the primary `license-mapping.xml` file located at <https://github.com/Jasig/apereo-parent/blob/master/licenses/license-mappings.xml>.
 
 Install the build locally:
+
 ```sh
 $ mvn clean install
 ```
 
-Ideally, committers will be running the `mvn` `notice`, `license`, and `javadoc` before they commit changes to the repo.  If there are changes needed, review the differences, and then commit to `master`:
+Ideally, committers will be running the `mvn` `notice`, `license`, and `javadoc` before they commit changes to the repo. If there are changes needed, review the differences, and then commit to `master`:
+
 ```sh
 $ git commit -am "chore: pre-release prep"
 ```
@@ -147,16 +150,17 @@ Using the component's version, configure uPortal-start to pick it up in `.../ape
 For example, if you are building version `3.5.1-SNAPSHOT` of the Bookmarks portlet, you'd configure `.../apereo/uPortal-start/gradle.properties` with `bookmarksPortletVersion=3.5.1-SNAPSHOT`.
 
 Run uPortal-start with the local build
+
 ```sh
 $ ./gradlew clean portalInit
 ```
 
 ### Verify
 
-*   Unit tests are automatically run on commits, so ensure the latest commit's CI build passed.
-*   FUTURE - Need to run the cross browser platform tests and the performance tests
-*   Smoke test the UI manually of the component
-    *   Pay attention to new changes
+- Unit tests are automatically run on commits, so ensure the latest commit's CI build passed.
+- FUTURE - Need to run the cross browser platform tests and the performance tests
+- Smoke test the UI manually of the component
+  - Pay attention to new changes
 
 ## Cut Release
 
@@ -212,11 +216,11 @@ $ curl -X GET \
 
 ### Review and publish
 
-1.  Log into <https://central.sonatype.com>
-2.  Navigate to **Deployments** — the staged artifacts should now be visible.
-3.  Review the release for the expected artifacts (parent POM + every submodule, including any WAR modules).
-4.  Verify the artifacts pass validation checks (signatures, POM requirements, matching `<packaging>` — see below).
-5.  Publish the deployment to make it available on Maven Central.
+1. Log into <https://central.sonatype.com>
+2. Navigate to **Deployments** — the staged artifacts should now be visible.
+3. Review the release for the expected artifacts (parent POM + every submodule, including any WAR modules).
+4. Verify the artifacts pass validation checks (signatures, POM requirements, matching `<packaging>` — see below).
+5. Publish the deployment to make it available on Maven Central.
 
 ### Recovering from a failed deployment
 
@@ -224,17 +228,17 @@ When the portal's validation rejects a deployment, the staged repository goes in
 
 The recovery sequence is the same regardless of which validation rule fired:
 
-1.  In the portal UI under **Deployments**, find the failed entry, click **Drop** (not **Publish**).
-2.  Fix the root cause locally (signature, POM metadata, packaging, etc. — see common failures below).
-3.  If `release:perform` had already advanced the version (i.e. the `release-plugin` commits + tag are on `master` for a version that never reached Maven Central): the cleanest path is to **skip that version** and release as the next one. Document it in the next-version's release notes ("X.Y.Z was prepared but never published due to ... ; X.Y.Z+1 ships the same intended content"). The orphan tag remains on the repo as historical record. Rewriting tag history is destructive and rarely worth it.
-4.  Re-run `mvn release:clean release:prepare release:perform`, then the manual upload curl above.
+1. In the portal UI under **Deployments**, find the failed entry, click **Drop** (not **Publish**).
+2. Fix the root cause locally (signature, POM metadata, packaging, etc. — see common failures below).
+3. If `release:perform` had already advanced the version (i.e. the `release-plugin` commits + tag are on `master` for a version that never reached Maven Central): the cleanest path is to **skip that version** and release as the next one. Document it in the next-version's release notes ("X.Y.Z was prepared but never published due to ... ; X.Y.Z+1 ships the same intended content"). The orphan tag remains on the repo as historical record. Rewriting tag history is destructive and rarely worth it.
+4. Re-run `mvn release:clean release:prepare release:perform`, then the manual upload curl above.
 
 #### Common validation failures
 
--   **`Failed to verify the PGP signature. Please contact support for assistance.`** — The signing key isn't reachable on `keys.openpgp.org` (the keyserver Central Portal queries first). Upload it as described in the Prerequisites and verify with the `curl` check.
--   **`Developers information is missing`** — The published POM lacks a `<developers>` element. See "Verify required POM metadata" above.
--   **`File with path '.../{artifactId}-{version}.jar' is missing`** — The deployment manifest lists a primary `.jar` for a module that doesn't actually upload one. Common cause for `<packaging>war</packaging>` modules: the Java + War + Spring Boot plugin combo auto-enables a plain `jar` task on top of the War. In Gradle, set `jar.enabled = false` (Spring Boot 1.x) or `bootJar { enabled = false }` (Spring Boot 2+). In Maven this rarely happens because `<packaging>` is authoritative.
--   **`Repository ... is in state closed and must be dropped before a new release can occur`** — A previous deployment in the same namespace is still staged. Drop it first.
+- **`Failed to verify the PGP signature. Please contact support for assistance.`** — The signing key isn't reachable on `keys.openpgp.org` (the keyserver Central Portal queries first). Upload it as described in the Prerequisites and verify with the `curl` check.
+- **`Developers information is missing`** — The published POM lacks a `<developers>` element. See "Verify required POM metadata" above.
+- **`File with path '.../{artifactId}-{version}.jar' is missing`** — The deployment manifest lists a primary `.jar` for a module that doesn't actually upload one. Common cause for `<packaging>war</packaging>` modules: the Java + War + Spring Boot plugin combo auto-enables a plain `jar` task on top of the War. In Gradle, set `jar.enabled = false` (Spring Boot 1.x) or `bootJar { enabled = false }` (Spring Boot 2+). In Maven this rarely happens because `<packaging>` is authoritative.
+- **`Repository ... is in state closed and must be dropped before a new release can occur`** — A previous deployment in the same namespace is still staged. Drop it first.
 
 ### A note on POM packaging
 
@@ -246,16 +250,15 @@ $ grep -l '<packaging>war</packaging>' $(find . -name pom.xml -not -path '*/targ
 
 ## Create Release Notes
 
-1.  Use Git to inspect the incremental commits since the last release (e.g. `$ git log v3.5.0..3.5.1 --no-merges`)
-2.  Review the issue tracker and confirm that the referenced issues have been Resolved
-3.  Enter the release notes on the GitHub releases page in the component's repo
-    -   It's helpful to use the previous release notes as a guide
-    -   Each commit type goes into a sub section with the type as a header (Fixes, Chores, Features, etc...).
+1. Use Git to inspect the incremental commits since the last release (e.g. `$ git log v3.5.0..3.5.1 --no-merges`)
+2. Review the issue tracker and confirm that the referenced issues have been Resolved
+3. Enter the release notes on the GitHub releases page in the component's repo
+   - It's helpful to use the previous release notes as a guide
+   - Each commit type goes into a sub section with the type as a header (Fixes, Chores, Features, etc...).
 
 ## Update uPortal-start
 
-
-Open a Pull Request on `uPortal-start` to update the version of the newly released component.  Do a quick smoke test to ensure it built:
+Open a Pull Request on `uPortal-start` to update the version of the newly released component. Do a quick smoke test to ensure it built:
 
 ```sh
 $ cd {uPortal-start repo}
@@ -268,9 +271,10 @@ $ ./gradlew tomcatStop
 
 Publish a new apereo/uPortal-demo Docker image and update the `:latest` tag.
 Prerequisites:
--   Docker Cloud account (<https://cloud.docker.com>)
--   Access to post to the apereo Docker group
--   The uPortal version has been added to `uPortal-start`
+
+- Docker Cloud account (<https://cloud.docker.com>)
+- Access to post to the apereo Docker group
+- The uPortal version has been added to `uPortal-start`
 
 ```sh
 $ cd {uPortal-start repo}
@@ -284,16 +288,15 @@ $ docker push apereo/uportal-demo:latest
 
 For any non-snapshot release, email an announcement to [`uportal-dev`](https://groups.google.com/a/apereo.org/forum/#!forum/uportal-dev) and [`uportal-user`](https://groups.google.com/a/apereo.org/forum/#!forum/uportal-user).
 
--   Be sure to acknowledge those who contributed to the release.
--   Be sure to put the release into context for existing deployers to understand.
+- Be sure to acknowledge those who contributed to the release.
+- Be sure to put the release into context for existing deployers to understand.
 
 Have someone with access to the [uPortal Twitter account](https://twitter.com/uportal) announce the release.
 
 ## References
 
--   <https://apereo.atlassian.net/wiki/spaces/UPC/pages/102336655/Cutting+a+uPortal+Release>
--   <https://central.sonatype.org/publish/publish-portal-guide/>
--   <https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/>
--   <https://maven.apache.org/maven-release/maven-release-plugin/>
--   <https://docs.gradle.org/current/userguide/signing_plugin.html#sec:signatory_credentials>
-
+- <https://apereo.atlassian.net/wiki/spaces/UPC/pages/102336655/Cutting+a+uPortal+Release>
+- <https://central.sonatype.org/publish/publish-portal-guide/>
+- <https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/>
+- <https://maven.apache.org/maven-release/maven-release-plugin/>
+- <https://docs.gradle.org/current/userguide/signing_plugin.html#sec:signatory_credentials>

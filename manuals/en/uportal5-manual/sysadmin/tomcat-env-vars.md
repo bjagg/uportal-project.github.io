@@ -74,8 +74,8 @@ Continuing with our examples, we can now set the HTTP port in `conf/server.xml`:
                connectionTimeout="20000"
                redirectPort="8443"
                maxThreads="1200"
-               compression="on" 
-               compressionMinSize="1024" 
+               compression="on"
+               compressionMinSize="1024"
                compressibleMimeType="text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json"
     />
 ```

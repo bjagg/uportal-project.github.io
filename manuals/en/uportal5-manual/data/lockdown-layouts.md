@@ -10,10 +10,10 @@ There are already default versions of files that `GRANT` these permissions in th
 
 The originals are:
 
-````bash
+```bash
 data/base/permission_set/Authenticated_Users__ADD_TAB__UP_SYSTEM.permission-set.xml
 data/base/permission_set/Authenticated_Users__CUSTOMIZE__UP_SYSTEM.permission-set.xml
-````
+```
 
 And should be copied to your permission_set data directory, changing target
 `permission-type` to `DENY`.

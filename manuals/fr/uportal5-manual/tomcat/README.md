@@ -1,16 +1,16 @@
 # Installation de Tomcat
 
-Apache Tomcat est le conteneur de servlet recommandé à utiliser avec uPortal. Alors que uPortal requiert 
-un conteneur de servlet compatible avec Servlet 3.0, aussi un autre conteneur servlet peut être utilisé, 
-mais la plupart des implémenteurs d'uPortal le déploient sur Apache Tomcat. Choisir Tomcat 8.x permettra probablement 
+Apache Tomcat est le conteneur de servlet recommandé à utiliser avec uPortal. Alors que uPortal requiert
+un conteneur de servlet compatible avec Servlet 3.0, aussi un autre conteneur servlet peut être utilisé,
+mais la plupart des implémenteurs d'uPortal le déploient sur Apache Tomcat. Choisir Tomcat 8.x permettra probablement
 aux utilisateurs d'obtenir les meilleurs conseils de la communauté.
 
 Voir aussi
 
-+   [Mettre Httpd en front de Tomcat](fronting-with-httpd.md)
-+   [Utiliser SSL](ssl-configuration.md)
+- [Mettre Httpd en front de Tomcat](fronting-with-httpd.md)
+- [Utiliser SSL](ssl-configuration.md)
 
-## Installation Linux/Unix 
+## Installation Linux/Unix
 
 ### 1. Téléchargement
 
@@ -26,13 +26,13 @@ tar -zxvf apache-tomcat-8.0.33.tar.gz
 
 ### 3. Renommer
 
-*Optionnellement* renommer votre installation en quelque chose de plus signifiant :
+_Optionnellement_ renommer votre installation en quelque chose de plus signifiant :
 
 ```shell_session
 mv apache-tomcat-8.0.33 uportal-tomcat
 ```
 
-### 4. Modifier vos variables d'environnement 
+### 4. Modifier vos variables d'environnement
 
 Modifier vos variables d'environnement :
 
@@ -41,7 +41,7 @@ export JAVA_HOME=/path/to/your/java
 export TOMCAT_HOME=/path/to/your/tomcat
 ```
 
-### 5.Tester votre installation de Tomcat 
+### 5.Tester votre installation de Tomcat
 
 #### a. Démarrer Tomcat
 
@@ -80,14 +80,15 @@ Vous devez définir une variable d'environnement `JAVA_HOME`.
 ```shell
 JAVA_HOME : C:\Program Files\Java\jdk1.x
 ```
-Pour Windows (cela peut varier selon les versions), vous pouvez créer ces variables d'environnement en procédant comme suit: 
-cliquer avec le bouton droit sur 'Poste de travail', sélectionnez dans propriétés l'onglet Avancé. 
-Puis cliquer sur Variables d'environnement et sous Variables système, cliquer sur Nouveau. 
+
+Pour Windows (cela peut varier selon les versions), vous pouvez créer ces variables d'environnement en procédant comme suit:
+cliquer avec le bouton droit sur 'Poste de travail', sélectionnez dans propriétés l'onglet Avancé.
+Puis cliquer sur Variables d'environnement et sous Variables système, cliquer sur Nouveau.
 À partir d'ici, entrer le nom et la valeur de `JAVA_HOME` s'il n'est pas déjà créé.
 
 ### 4. Démarrer Tomcat
 
-Essayez de démarrer Tomcat en exécutant le fichier de commandes `C:\apache-tomcat-8.x\bin\startup.bat`. 
+Essayez de démarrer Tomcat en exécutant le fichier de commandes `C:\apache-tomcat-8.x\bin\startup.bat`.
 
 ### 5. Vérifier dans un navigateur
 
@@ -123,14 +124,14 @@ Pour activer cette fonctionnalité pour Tomcat 7 ou 8, ajoutez `sessionCookiePat
 
 ### Augmenter la taille du cache de ressources
 
-uPortal et la collection typique de ses portlets prennent beaucoup de place. Tomcat 8.5 émet des avertissements sur l'épuisement de l'espace de cache des ressources. Ajoutez la configuration de cache suivante juste avant la *fermeture* du nœud `Context`.
+uPortal et la collection typique de ses portlets prennent beaucoup de place. Tomcat 8.5 émet des avertissements sur l'épuisement de l'espace de cache des ressources. Ajoutez la configuration de cache suivante juste avant la _fermeture_ du nœud `Context`.
 
 ```xml
 <Resources cachingAllowed="true" cacheMaxSize="100000" />
 </Context>
 ```
 
-### Configuration Heap JVM 
+### Configuration Heap JVM
 
 uPortal requiert un espace `PermGen` plus grand que la norme (Java 7 uniquement) et plus de segments de mémoire que ceux alloués par défaut. Un bon ensemble de paramètres de Heap est
 
@@ -144,12 +145,11 @@ Pour les ajouter, créer un fichier appelé `setenv.sh` (Linux / Mac) ou `setenv
 JAVA_OPTS="$JAVA_OPTS -XX:+PrintCommandLineFlags -XX:MaxPermSize=384m -Xms1024m -Xmx2048m -Djsse.enableSNIExtension=false"
 ```
 
-### Autorisations requises de fichier 
+### Autorisations requises de fichier
 
 Plusieurs applications web d'uPortal écrivent dans leur dossier webapps -déployé- pour ajouter un contenu dynamique au portail (la modification de la Skin dynamique Respondr et la gestion des pièces jointes téléchargées sur uPortal sont deux cas d'utilisation). Assurez-vous que le processus Tomcat est en cours d'exécution tout comme l'accès en écriture aux répertoires `CATALINA_BASE/webapps/*`. Généralement, cela se fait en ayant le même compte tomcat en cours d'exécution que le compte que vous utilisez pour construire et déployer uPortal.
 
-
-### HTML GZip-ping 
+### HTML GZip-ping
 
 (Facultatif mais FORTEMENT SUGGÉRÉ à moins de le faire avec Apache httpd ou un appareil externe).
 
@@ -160,7 +160,7 @@ Le GZipping du contenu HTML peut être effectué via Tomcat. Pour activer cette 
 ```xml
 <Connector port="8080" protocol="HTTP/1.1"
   connectionTimeout="20000" redirectPort="8443"
-  compression="on" 
+  compression="on"
   compressibleMimeType="text/html,text/xml,text/plain,text/css,text/javascript,application/javascript"/>
 ```
 
@@ -190,8 +190,8 @@ La valeur par défaut de Tomcat est de 30 minutes.
 
 #### paramétrages JVM
 
-+   [Exemple de paramétrage JVM](https://wiki.jasig.org/display/UPC/JVM+Configurations)
-+   [Heap tuning](https://wiki.jasig.org/display/UPC/uPortal+Heap+Tuning)
+- [Exemple de paramétrage JVM](https://wiki.jasig.org/display/UPC/JVM+Configurations)
+- [Heap tuning](https://wiki.jasig.org/display/UPC/uPortal+Heap+Tuning)
 
 #### Désactiver SSLv3
 
@@ -202,15 +202,16 @@ Certains sites ont choisi de désactiver SSLv3 sur leur serveur CAS en raison de
 ```
 javax.net.ssl.SSLHandshakeException: Received fatal alert: handshake_failure
 ```
+
 Une solution consiste à définir les protocoles utilisés par Java lors de la création de connexions SSL. Vous pouvez le faire en ajoutant la propriété suivante à `JAVA_OPTS` (ou `CATALINA_OPTS` si vous l'utilisez) :
 
-Oracle Java7: `-Dhttps.protocols="TLSv1,TLSv1.1,TLSv1.2"` 
+Oracle Java7: `-Dhttps.protocols="TLSv1,TLSv1.1,TLSv1.2"`
 
-Votre serveur CAS doit être configuré pour utiliser l'un des protocoles mentionnés ou l'établissement de liaison (handshake) échouera. Si votre serveur CAS de test est accessible au public, vous pouvez voir les protocoles qu'il prend en charge en [testant son nom de domaine via SSL Labs](https://www.ssllabs.com/ssltest/). 
+Votre serveur CAS doit être configuré pour utiliser l'un des protocoles mentionnés ou l'établissement de liaison (handshake) échouera. Si votre serveur CAS de test est accessible au public, vous pouvez voir les protocoles qu'il prend en charge en [testant son nom de domaine via SSL Labs](https://www.ssllabs.com/ssltest/).
 
 Si vous rencontrez des problèmes :
 
-+   [Diagnostiquer TLS, SSL, et HTTPS](https://blogs.oracle.com/java-platform-group/entry/diagnosing_tls_ssl_and_https)
+- [Diagnostiquer TLS, SSL, et HTTPS](https://blogs.oracle.com/java-platform-group/entry/diagnosing_tls_ssl_and_https)
 
 [page de configuration Tomcat]: http://tomcat.apache.org/tomcat-7.0-doc/config/http.html
 [faster Tomcat startup wiki page]: http://wiki.apache.org/tomcat/HowTo/FasterStartUp

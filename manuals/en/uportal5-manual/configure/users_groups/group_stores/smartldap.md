@@ -37,22 +37,22 @@ Add (or un-comment) the following entry in uportal-war/src/main/resources/proper
 ### Configure SmartLdapGroupStore
 
 To configure SmartLdapGroupStore implement a bean of class `org.apereo.portal.groups.smartldap.SmartLdapGroupStore`
-with a name of `smartLdapGroupStore`. 
+with a name of `smartLdapGroupStore`.
 
 Here is a summary of the settings for this bean:
 
--   `ldapContext`: reference to the LDAP Context bean to use
--   `memberOfAttributeName`: Name of the Person Attribute on each user that contains the distinguishedName of each group he/she is a member of (e.g. 'memberOf')
--   `baseGroupDn`: DN fragment that will be prepended to the Base DN of the `ldapContext` under which to query for group records
--   `childGroupKeyRegex`: Regex to extract the ID of the group
--   `displayPersonMembers`: ??  (true|false)
--   `filter`: LDAP filter for what objects to evaluate(e.g. '(objectCategory=group)', '(objectClass=groupOfNames)')
--   `groupsTreeRefreshIntervalSeconds`: how frequently should SmartLdap check for changes to the groups hierarchy?
--   `resolveMemberGroups`: Whether you want to resolve member groups outside the original Base DN (true/false)
--   `resolveDn`: another Base DN for resolving member groups if `resolveMemberGroups` (above) it true
--   `attributeMapper` > `keyAttributeName`: LDAP attribute on each group that contains it's distinguished name
--   `attributeMapper` > `groupNameAttributeName`: LDAP attribute on each group that contains it's human-readable name
--   `attributeMapper` > `membershipAttributeName`: LDAP attribute on each group that contains distinguished name of each of it's members
+- `ldapContext`: reference to the LDAP Context bean to use
+- `memberOfAttributeName`: Name of the Person Attribute on each user that contains the distinguishedName of each group he/she is a member of (e.g. 'memberOf')
+- `baseGroupDn`: DN fragment that will be prepended to the Base DN of the `ldapContext` under which to query for group records
+- `childGroupKeyRegex`: Regex to extract the ID of the group
+- `displayPersonMembers`: ?? (true|false)
+- `filter`: LDAP filter for what objects to evaluate(e.g. '(objectCategory=group)', '(objectClass=groupOfNames)')
+- `groupsTreeRefreshIntervalSeconds`: how frequently should SmartLdap check for changes to the groups hierarchy?
+- `resolveMemberGroups`: Whether you want to resolve member groups outside the original Base DN (true/false)
+- `resolveDn`: another Base DN for resolving member groups if `resolveMemberGroups` (above) it true
+- `attributeMapper` > `keyAttributeName`: LDAP attribute on each group that contains it's distinguished name
+- `attributeMapper` > `groupNameAttributeName`: LDAP attribute on each group that contains it's human-readable name
+- `attributeMapper` > `membershipAttributeName`: LDAP attribute on each group that contains distinguished name of each of it's members
 
 Example `attributesMapper` Bean:
 

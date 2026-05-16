@@ -3,6 +3,7 @@
 En exemple fonctionnel vous pouvez regarder les fichiers de configuration des test travis dans `uPortal-start/.travis/conf/database/mariadb/`
 
 ## Étape 1 : Paramétrage du server MariaDB
+
 Editer le fichier /etc/mysql/mariadb.conf.d/60-server.cnf. (ici pour Debian 9)
 Dans la partie `[mysqld]` ajouter les éléments suivant :
 
@@ -25,12 +26,15 @@ innodb_log_buffer_size=64M
 ```
 
 **NOTE:** À partir de mariaDB 10.1.35 indiquer en plus la configuration suivante:
+
 ```properties
 innodb_default_row_format=dynamic
 ```
+
 Cela aura pour effet de créer par défaut toutes les tables avec le row_format=dynamic s'il n'est pas indiqué.
 
 En complément vous pouvez indiquer ces propriétés afin de définir l'UTF-8 par défaut, cela est facultatif si vous créez votre base de données avec le jeu de caractères `uft8mb4` et la collation adequat (cf ci après).
+
 ```properties
 character-set-server  = utf8mb4
 collation-server      = utf8mb4_unicode_520_ci
@@ -39,6 +43,7 @@ collation-server      = utf8mb4_unicode_520_ci
 ## Étape 2 : Configurer l'utilisateur et la base de donnée
 
 Se connecter au serveur de base de données.
+
 ```SQL
 CREATE USER 'uportal'@'localhost' IDENTIFIED BY 'uportal';
 create database uportal CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci;
@@ -53,13 +58,16 @@ La partie sur 3 octets n'est pas un support complet de l'UTF-8, cela ne supporte
 
 Aussi la collation `utf8mb4_unicode_520_ci` est un nouvel et bon algorithme pour ordonner les données en UTF-8, mais vous pouvez tout aussi bien rester sur 'utf8_unicode_ci' [Regarder la documentation MySQL pour les détails](https://dev.mysql.com/doc/refman/5.6/en/charset-collation-names.html)
 
-## Étape 3 : Configurer Uportal 
+## Étape 3 : Configurer Uportal
 
-### Éditer uPortal-start/gradle.properties 
+### Éditer uPortal-start/gradle.properties
+
 ```properties
 mysqldbVersion=5.1.45
 ```
+
 ### Éditer uPortal-start/overlays/build.gradle
+
 ```gradle
 dependencies {
         /*
@@ -71,9 +79,10 @@ dependencies {
 
 ```
 
-### Éditer uPortal-start/etc/portal/global.properties 
+### Éditer uPortal-start/etc/portal/global.properties
 
 Dans la partie Database Connection
+
 ```properties
 hibernate.connection.driver_class=com.mysql.jdbc.Driver
 hibernate.connection.url=jdbc:mysql://localhost/portlets
@@ -89,12 +98,14 @@ Vous devez copier/coller cette configuration pour chaque personnalisation d'acc�
 
 **NOTE:** Selon la version d'hibernate utilisée et la version du serveur de données il peut être nécessaire de sélectionner un Dialect adéquat [voici où chercher](https://github.com/hibernate/hibernate-orm/tree/main/hibernate-core/src/main/java/org/hibernate/dialect) (Attention à sélectionner la bonne version en fonction du tag)
 
-
 ## Étape 4 : Initialisation de la Base de Donnée
+
 ```shell
 ./gradlew dataInit
 ```
+
 ## Étape 5 : Déploiement de uPortal
+
 ```shell
 ./gradlew tomcatDeploy
 ```

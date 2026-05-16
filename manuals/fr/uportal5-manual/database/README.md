@@ -90,11 +90,11 @@ Remarque: Aussi ces fichiers peuvent être utilisés pour définir d'autres prop
 
 Sélectionner la base de données ci-dessous pour des notes et des exemples de configuration.
 
-+   [DB2](db2.md)
-+   [Hypersonic](hypersonic.md)
-+   [Microsoft SQL Server](ms-sqlserver.md)
-+   [MySQL](mysql.md)
-+   [MariaDB](mariadb.md)
-+   [Oracle RDBMS](oracle.md)
-+   [PostgreSQL](postgresql.md)
-+   [Sybase](sybase.md)
+- [DB2](db2.md)
+- [Hypersonic](hypersonic.md)
+- [Microsoft SQL Server](ms-sqlserver.md)
+- [MySQL](mysql.md)
+- [MariaDB](mariadb.md)
+- [Oracle RDBMS](oracle.md)
+- [PostgreSQL](postgresql.md)
+- [Sybase](sybase.md)

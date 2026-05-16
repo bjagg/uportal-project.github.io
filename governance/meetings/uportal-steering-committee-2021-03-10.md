@@ -1,12 +1,13 @@
 # 2021-03-10 uPortal Steering Committee Meeting Summary
 
 ## Attendees
+
 Jim Helwig, Benito Gonzalez, Jonathan Tran, Toben Archer, Julien Gribonvald
 
 ## Updates
 
-*   Many GitHub repositories have been moved from [Jasig](https://github.com/Jasig) and [uPortal-contrib](https://github.com/uPortal-contrib) GitHub organizations to the [uPortal-project](https://github.com/uPortal-project) organization. Many thanks to Benito for the work in moving these repositories.
-*   The uPSC will be trying out using GitHub to track committee work
+- Many GitHub repositories have been moved from [Jasig](https://github.com/Jasig) and [uPortal-contrib](https://github.com/uPortal-contrib) GitHub organizations to the [uPortal-project](https://github.com/uPortal-project) organization. Many thanks to Benito for the work in moving these repositories.
+- The uPSC will be trying out using GitHub to track committee work
 
 ## Open Apereo 21
 

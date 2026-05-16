@@ -30,11 +30,13 @@ war {
 ```
 
 Add the overlay module to the global project at the end of the `setting.gradle` file
+
 ```gradle
 include 'overlays:my-portlet'
 ```
 
 Add the property to define the `my-portlet` version war to deploy in the `gradle.properties`
+
 ```properties
 MyPortletVersion=X.Y
 ```
